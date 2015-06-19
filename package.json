@@ -1,0 +1,11 @@
+{
+  "name": "grunt-split-gruntfile",
+  "version": "0.0.0",
+  "description": "Split Gruntfile.js subdiving tasks configurations in multiple files",
+  "main": "tasks/split-gruntfile.js",
+  "scripts": {
+    "test": "grunt test"
+  },
+  "author": "",
+  "license": "MIT"
+}
