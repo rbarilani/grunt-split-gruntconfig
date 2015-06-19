@@ -1,11 +1,24 @@
 {
-  "name": "grunt-split-gruntfile",
+  "name": "grunt-split-gruntconfig",
   "version": "0.0.0",
-  "description": "Split Gruntfile.js subdiving tasks configurations in multiple files",
-  "main": "tasks/split-gruntfile.js",
-  "scripts": {
-    "test": "grunt test"
+  "description": "Utility task to split existing 'long' grunt config into multiple files",
+  "main": "src/split-gruntconfig.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/rbarilani/grunt-split-gruntconfig.git"
   },
-  "author": "",
-  "license": "MIT"
+  "author": {
+    "name" : "ruben Barilani",
+    "email" : "ruben.barilani.dev@gmail.com"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "grunt": "^0.4.5",
+    "fs-extra": "^0.19.0",
+    "glob": "^5.0.10",
+    "lodash": "^3.9.3",
+    "promise": "^7.0.3",
+    "string-template": "^0.2.1"
+  }
 }
