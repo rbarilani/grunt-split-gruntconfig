@@ -1,7 +1,9 @@
 var extend = require('lodash').extend;
 var fs = require('fs-extra');
 var path = require('path');
-var Promise = equire('promise');
+var Promise = require('promise');
+var format = require('string-template');
+var outputFilePromise = require('./output-file');
 
 var DEFAULT_OPTIONS  = {
   dest : 'grunt-config',
