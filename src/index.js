@@ -1,10 +1,7 @@
-var _       = require('lodash');
-var path    = require('path');
-var fs      = require('fs-extra');
-var Promise = require('promise');
-var format  = require('string-template');
-var extend  = _.extend;
-var glob    = require('glob');
+var extend = require('lodash').extend;
+var fs = require('fs-extra');
+var path = require('path');
+var Promise = equire('promise');
 
 var DEFAULT_OPTIONS  = {
   dest : 'grunt-config',
@@ -15,6 +12,11 @@ var DEFAULT_OPTIONS  = {
   "\nvar {taskName} = {taskConfig};" +
   "\n\nmodule.exports = {taskName};"
 };
+
+splitGruntconfig.TASK_DESCRIPTION = 'Utility task to split existing "long" grunt config into multiple files';
+splitGruntconfig.TASK_NAME = 'split-gruntconfig';
+splitGruntconfig.TASK_CONFIG_KEY = 'splitGruntconfig';
+splitGruntconfig.load = require('./load');
 
 /**
  * Split config in multiple files (modules)
@@ -66,42 +68,5 @@ function splitGruntconfig (gruntConfig, options) {
   return Promise.all(promises);
 }
 
-splitGruntconfig.TASK_DESCRIPTION = 'Utility task to split existing "long" grunt config into multiple files';
-splitGruntconfig.TASK_NAME = 'split-gruntconfig';
-splitGruntconfig.TASK_CONFIG_KEY = 'splitGruntconfig';
-splitGruntconfig.load = loadConfig;
-
-function loadConfig(_path) {
-  var object = {};
-  var key;
-
-  glob.sync('*', {cwd: _path}).forEach(function(option) {
-    key = option.replace(/\.js$/,'');
-    object[key] = require(path.resolve(_path, option));
-  });
-  return object;
-}
-
-/**
- * Write data to file
- *
- * @param {String} file
- * @param {String} data
- * @returns {Promise}
- */
-function outputFilePromise(file, data) {
-  return new Promise(function(resolve, reject) {
-    fs.outputFile(file, data, function (err) {
-      if(err) {
-        reject(err);
-      }else{
-        resolve({
-          file : file,
-          data : data
-        });
-      }
-    });
-  });
-}
 
 module.exports = splitGruntconfig;

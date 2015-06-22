@@ -1,4 +1,4 @@
-var splitGruntconfig = require('../src/split-gruntconfig.js');
+var splitGruntconfig = require('../src/index.js');
 
 module.exports = function (grunt) {
 
@@ -10,7 +10,7 @@ module.exports = function (grunt) {
         grunt.log.ok('Files written!'); done();
       })
       .catch(function (error) {
-        grunt.log.error(error); done();
+        grunt.log.error(error); done(false);
       });
   });
 };

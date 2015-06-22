@@ -2,15 +2,17 @@
   "name": "grunt-split-gruntconfig",
   "version": "0.0.0",
   "description": "Utility task to split existing 'long' grunt config into multiple files",
-  "main": "src/split-gruntconfig.js",
-  "scripts": {},
+  "main": "src/index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/jasmine-node test"
+  },
   "repository": {
     "type": "git",
     "url": "git://github.com/rbarilani/grunt-split-gruntconfig.git"
   },
   "author": {
-    "name" : "ruben Barilani",
-    "email" : "ruben.barilani.dev@gmail.com"
+    "name": "Ruben Barilani",
+    "email": "ruben.barilani.dev@gmail.com"
   },
   "license": "MIT",
   "dependencies": {
@@ -20,5 +22,9 @@
     "lodash": "^3.9.3",
     "promise": "^7.0.3",
     "string-template": "^0.2.1"
+  },
+  "devDependencies": {
+    "jasmine-node": "^1.14.5",
+    "rewire": "^2.3.4"
   }
 }
