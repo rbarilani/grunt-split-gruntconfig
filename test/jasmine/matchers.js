@@ -66,6 +66,23 @@ beforeEach(function () {
       };
 
       return isEmpty;
+    },
+    toBeFunction : function () {
+      var isFunction = typeof this.actual === 'function';
+
+      this.message = function () {
+        var basemessage = 'Expected ' + this.actual + ' to be a Function.';
+
+        if(isFunction) {
+          return basemessage;
+        }
+        return basemessage + 'But actually is ' + (typeof this.actual);
+      };
+
+      return isFunction;
+    },
+    toBePromiseLike : function () {
+      return this.actual && typeof this.actual.then === 'function';
     }
   })
 });

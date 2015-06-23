@@ -4,7 +4,8 @@
   "description": "Utility task to split existing 'long' grunt config into multiple files",
   "main": "src/index.js",
   "scripts": {
-    "test": "./node_modules/.bin/istanbul cover ./node_modules/.bin/jasmine-node --captureExceptions test"
+    "test": "./node_modules/.bin/istanbul cover ./node_modules/.bin/jasmine-node --captureExceptions test",
+    "html-coverage" : "./node_modules/.bin/istanbul cover --report html ./node_modules/.bin/jasmine-node --captureExceptions test"
   },
   "repository": {
     "type": "git",

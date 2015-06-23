@@ -41,4 +41,13 @@ describe('matchers', function () {
       expect(false).toBeEmpty();
     });
   });
+
+  describe('toBeFunction()', function () {
+    it('should work as expected', function () {
+      var noop = function () {};
+      var string = '';
+      expect(noop).toBeFunction();
+      expect(string).not.toBeFunction();
+    });
+  });
 });
