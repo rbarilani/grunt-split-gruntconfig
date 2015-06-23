@@ -4,7 +4,7 @@
   "description": "Utility task to split existing 'long' grunt config into multiple files",
   "main": "src/index.js",
   "scripts": {
-    "test": "./node_modules/.bin/jasmine-node test"
+    "test": "./node_modules/.bin/istanbul cover ./node_modules/.bin/jasmine-node --captureExceptions test"
   },
   "repository": {
     "type": "git",
@@ -24,6 +24,8 @@
     "string-template": "^0.2.1"
   },
   "devDependencies": {
+    "coveralls": "^2.11.2",
+    "istanbul": "^0.3.15",
     "jasmine-node": "^1.14.5",
     "rewire": "^2.3.4"
   }
