@@ -81,6 +81,9 @@ beforeEach(function () {
 
       return isFunction;
     },
+    toBeObject : function () {
+      return typeof this.actual === 'object';
+    },
     toBePromiseLike : function () {
       return this.actual && typeof this.actual.then === 'function';
     }

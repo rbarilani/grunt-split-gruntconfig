@@ -4,6 +4,7 @@ var path = require('path');
 var Promise = require('promise');
 var format = require('string-template');
 var outputFilePromise = require('./output-file');
+var sourceCode = require('./source-code');
 
 var DEFAULT_OPTIONS  = {
   dest : 'grunt-config',
@@ -61,8 +62,10 @@ function splitGruntconfig (gruntConfig, options) {
 
     var data = format(opt.template, {
       taskName : taskName,
-      taskConfig :JSON.stringify(gruntConfig[taskName], null, 2)
+      taskConfig : sourceCode.toSource(gruntConfig[taskName])
     });
+
+    data = sourceCode.beautify(data);
 
     return outputFilePromise(resolvePath(taskName), data);
   });

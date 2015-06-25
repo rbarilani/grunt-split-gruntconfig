@@ -25,7 +25,7 @@ describe('split-gruntconfig', function () {
 
     splitGruntconfig.__set__('outputFilePromise', function (filepath, data) {
       expect(filepath.indexOf('.tmp-test/jshint.js') > -1).toBe(true);
-      expect(data.indexOf('"foo": "bar"') > -1).toBe(true);
+      expect(data.indexOf('foo: "bar"') > -1).toBe(true);
       return 'jshint';
     });
 
@@ -45,7 +45,7 @@ describe('split-gruntconfig', function () {
 
     splitGruntconfig.__set__('outputFilePromise', function (filepath, data) {
       expect(filepath.indexOf('.tmp-test/jshint.js') > -1).toBe(true);
-      expect(data.indexOf('"foo": "bar"') > -1).toBe(true);
+      expect(data.indexOf('foo: "bar"') > -1).toBe(true);
       return 'jshint';
     });
 
