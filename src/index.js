@@ -13,7 +13,10 @@ var DEFAULT_OPTIONS  = {
   "\n * '{taskName}' grunt task configuration" +
   "\n **/" +
   "\nvar {taskName} = {taskConfig};" +
-  "\n\nmodule.exports = {taskName};"
+  "\n\nmodule.exports = {taskName};",
+  beautify : {
+    'indent_size': 2
+  }
 };
 
 splitGruntconfig.TASK_DESCRIPTION = 'Utility task to split existing "long" grunt config into multiple files';
@@ -61,8 +64,8 @@ function splitGruntconfig (gruntConfig, options) {
   }).map(function (taskName) {
 
     var data = format(opt.template, {
-      taskName : taskName,
-      taskConfig : sourceCode.toSource(gruntConfig[taskName])
+      taskName   : taskName,
+      taskConfig : sourceCode.toSource(gruntConfig[taskName], DEFAULT_OPTIONS.beautify)
     });
 
     data = sourceCode.beautify(data);
