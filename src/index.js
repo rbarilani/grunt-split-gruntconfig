@@ -7,7 +7,7 @@ var outputFilePromise = require('./output-file');
 var sourceCode = require('./source-code');
 
 var DEFAULT_OPTIONS  = {
-  dest : 'grunt-config',
+  dest : 'grunt',
   exclude : [splitGruntconfig.TASK_CONFIG_KEY],
   template : "/**" +
   "\n * '{taskName}' grunt task configuration" +
@@ -22,7 +22,6 @@ var DEFAULT_OPTIONS  = {
 splitGruntconfig.TASK_DESCRIPTION = 'Utility task to split existing "long" grunt config into multiple files';
 splitGruntconfig.TASK_NAME = 'split-gruntconfig';
 splitGruntconfig.TASK_CONFIG_KEY = 'splitGruntconfig';
-splitGruntconfig.load = require('./load');
 
 /**
  * Split config in multiple files (modules)

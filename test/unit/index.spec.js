@@ -71,12 +71,11 @@ describe('split-gruntconfig', function () {
     expect(result).toEqual(['jshint']);
   });
 
-  describe('.TASK_DESCRIPTION, .TASK_NAME, .TASK_CONFIG_KEY, .load', function () {
+  describe('.TASK_DESCRIPTION, .TASK_NAME, .TASK_CONFIG_KEY', function () {
     it('should be defined', function () {
       expect(splitGruntconfig.TASK_DESCRIPTION).toBeDefined();
       expect(splitGruntconfig.TASK_CONFIG_KEY).toBeDefined();
       expect(splitGruntconfig.TASK_NAME).toBeDefined();
-      expect(splitGruntconfig.load).toBeDefined();
     });
   });
 });
