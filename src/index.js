@@ -6,7 +6,10 @@ var format = require('string-template');
 var outputFilePromise = require('./output-file');
 var sourceCode = require('./source-code');
 
-var DEFAULT_OPTIONS  = {
+splitGruntconfig.TASK_DESCRIPTION = 'Utility task to split existing "long" grunt config into multiple files';
+splitGruntconfig.TASK_NAME = 'split-gruntconfig';
+splitGruntconfig.TASK_CONFIG_KEY = 'splitGruntconfig';
+splitGruntconfig.DEFAULT_OPTIONS = {
   dest : 'grunt',
   exclude : [splitGruntconfig.TASK_CONFIG_KEY],
   template : "/**" +
@@ -18,10 +21,6 @@ var DEFAULT_OPTIONS  = {
     'indent_size': 2
   }
 };
-
-splitGruntconfig.TASK_DESCRIPTION = 'Utility task to split existing "long" grunt config into multiple files';
-splitGruntconfig.TASK_NAME = 'split-gruntconfig';
-splitGruntconfig.TASK_CONFIG_KEY = 'splitGruntconfig';
 
 /**
  * Split config in multiple files (modules)
@@ -36,8 +35,8 @@ splitGruntconfig.TASK_CONFIG_KEY = 'splitGruntconfig';
  */
 function splitGruntconfig (gruntConfig, options) {
 
-  var opt = extend({}, DEFAULT_OPTIONS, options || {});
-  var log = opt.log || console.log || function () {};
+  var opt = extend({}, splitGruntconfig.DEFAULT_OPTIONS, options || {});
+  var log = opt.log || console.log;
   var taskNames = Object.getOwnPropertyNames(gruntConfig);
   var resolvePath = function (taskName) {
     return path.resolve(opt.dest, taskName + '.js');
@@ -64,7 +63,7 @@ function splitGruntconfig (gruntConfig, options) {
 
     var data = format(opt.template, {
       taskName   : taskName,
-      taskConfig : sourceCode.toSource(gruntConfig[taskName], DEFAULT_OPTIONS.beautify)
+      taskConfig : sourceCode.toSource(gruntConfig[taskName], splitGruntconfig.DEFAULT_OPTIONS.beautify)
     });
 
     data = sourceCode.beautify(data);

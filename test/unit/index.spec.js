@@ -16,7 +16,7 @@ describe('split-gruntconfig', function () {
     expect(typeof splitGruntconfig).toBe('function');
   });
 
-  it('should work as expected', function () {
+  it('should work as expected with default options', function () {
     splitGruntconfig.__set__('Promise', {
       all : function (promises) {
         return promises;
@@ -24,29 +24,32 @@ describe('split-gruntconfig', function () {
     });
 
     splitGruntconfig.__set__('outputFilePromise', function (filepath, data) {
-      expect(filepath.indexOf('.tmp-test/jshint.js') > -1).toBe(true);
+      expect(filepath.indexOf('grunt/jshint.js') > -1).toBe(true);
       expect(data.indexOf('foo: "bar"') > -1).toBe(true);
       return 'jshint';
     });
 
-    var result = splitGruntconfig({jshint: {foo:'bar'}}, {
-      dest : '.tmp-test'
-    });
-
+    var result = splitGruntconfig({jshint: {foo:'bar'}});
     expect(result).toEqual(['jshint']);
   });
 
-  it('should skip existing files', function () {
+  it('should skip existing files and evaluate exclude option as expected', function () {
     splitGruntconfig.__set__('Promise', {
       all : function (promises) {
         return promises;
       }
     });
 
+    var outputFilePromiseCalled = 0;
     splitGruntconfig.__set__('outputFilePromise', function (filepath, data) {
       expect(filepath.indexOf('.tmp-test/jshint.js') > -1).toBe(true);
       expect(data.indexOf('foo: "bar"') > -1).toBe(true);
-      return 'jshint';
+      outputFilePromiseCalled = outputFilePromiseCalled + 1;
+
+      if(outputFilePromiseCalled === 1) {
+        return 'jshint';
+      }
+      throw new Error('Output file promise called too many times');
     });
 
     splitGruntconfig.__set__('fs', {
@@ -58,7 +61,10 @@ describe('split-gruntconfig', function () {
     var logCalled = false;
     var result = splitGruntconfig({
       existent : { foo : 'bar'},
-      jshint: { foo : 'bar'}
+      jshint: { foo : 'bar'},
+      splitGruntconfig : {
+        options : {}
+      }
     }, {
       dest : '.tmp-test',
       log : function (message) {
