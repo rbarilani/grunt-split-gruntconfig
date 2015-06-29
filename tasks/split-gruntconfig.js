@@ -8,7 +8,7 @@ module.exports = function (grunt) {
 
     splitGruntconfig(grunt.config.getRaw(), this.options())
       .then(function (){
-        grunt.log.ok('Files written!'); done();
+        grunt.log.ok('Files were created!'); done();
       })
       .catch(function (error) {
         grunt.log.error(error); done(false);
